@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cassandra"
 	"io/ioutil"
 	"os"
 
@@ -14,8 +15,9 @@ type ServerConfig struct {
 }
 
 type config struct {
-	Server   ServerConfig `yaml:"server"`
-	rootPath string
+	Server    ServerConfig     `yaml:"server"`
+	Cassandra cassandra.Config `yaml:"cassandra"`
+	rootPath  string
 }
 
 // loadConfig returns a struct representation of the YAML file.

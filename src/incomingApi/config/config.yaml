@@ -9,3 +9,8 @@ cassandra:
   proto_version: 4
   username: test123
   password: test123
+
+mysql:
+  database: test
+  username: test123
+  password: test123

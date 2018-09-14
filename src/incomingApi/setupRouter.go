@@ -1,8 +1,10 @@
 package main
 
 import (
+	"cassandra"
 	"net/http"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,10 +19,14 @@ func setupRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 
-	c := connections{
-		dbUser:   dbUserCreds,
-		dbDevice: dbDeviceCreds,
+	cass, err := cassandra.Open(cfg.Cassandra)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"Error": err,
+		}).Fatal("Error connecting to Cassandra")
 	}
+	defer cass.Close()
+	c := connections{csndra: &cass}
 
 	// Ping test for heartbeat
 	r.GET("/ping", heartbeat)

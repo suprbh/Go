@@ -22,7 +22,7 @@ func (c *connections) authorizeDevice() gin.HandlerFunc {
 		deviceID := g.Param("deviceID")
 		key := g.Request.Header.Get("X-API-Key")
 
-		dbDeviceID, ok := c.dbDevice[key]
+		dbDeviceID, ok := c.csndra.findDevice(key)
 		if !ok || dbDeviceID != deviceID {
 			g.IndentedJSON(http.StatusUnauthorized,
 				ErrorResponse{
@@ -43,7 +43,7 @@ func (c *connections) authorizeUser() gin.HandlerFunc {
 		password := g.Request.Header.Get("password")
 
 		// Hash the password
-		passwd, ok := c.dbUser[username]
+		passwd, ok := c.csndra.findUserPassword(username)
 		if !ok || passwd != password {
 			g.IndentedJSON(http.StatusUnauthorized,
 				ErrorResponse{

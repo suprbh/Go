@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cassandra"
 	"net/http"
 	"time"
 
@@ -9,25 +10,10 @@ import (
 )
 
 type connections struct {
-	dbUser   map[string]string
-	dbDevice map[string]string
-	dbData   map[string][]DeviceData
-	// TODO
-	// cass *cassandra.cctx
+	// dbData map[string][]DeviceData
+	csndra *cassandra.CassCtx
 	// mydb *mysqldb.mctx
 	// red *redis.ctx
-}
-
-// DB : Temporarily using a map instead of actual Redis/Cassandra/MySql/MongoDB database
-// dummy credentials
-var dbUserCreds = map[string]string{
-	"foo": "bar",
-	"sup": "test",
-}
-
-var dbDeviceCreds = map[string]string{
-	"apiKey1": "device1",
-	"apiKey2": " device2",
 }
 
 // DeviceProfile has all the information regarding the specific device
@@ -78,8 +64,8 @@ func (c *connections) PutData(g *gin.Context) {
 	}).Debug("Put Device data")
 
 	// TODO : add this data to the database
-	// c.db.AddDeviceData(dd)
-	c.dbData[deviceID] = append(c.dbData[deviceID], dd)
+	c.csndra.AddDeviceData(dd)
+	// c.dbData[deviceID] = append(c.dbData[deviceID], dd)
 
 }
 
