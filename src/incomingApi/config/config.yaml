@@ -1,0 +1,11 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+
+cassandra:
+  cluster:
+    - 127.0.0.1
+  keyspace: test
+  proto_version: 4
+  username: test123
+  password: test123
