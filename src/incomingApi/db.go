@@ -11,6 +11,7 @@ import (
 type connections struct {
 	dbUser   map[string]string
 	dbDevice map[string]string
+	dbData   map[string][]DeviceData
 	// TODO
 	// cass *cassandra.cctx
 	// mydb *mysqldb.mctx
@@ -35,8 +36,8 @@ type DeviceProfile struct {
 	deviceID    string
 	deviceType  string
 	modelNumber string
-	lat         string
-	lon         string
+	lat         float64
+	lon         float64
 }
 
 // UserProfile contains profile information of the user of the product
@@ -52,11 +53,11 @@ type DeviceData struct {
 }
 
 // putDevice updates the information about the device TODO
-func (c *connections) putDevice(g *gin.Context) {
+func (c *connections) PutDevice(g *gin.Context) {
 
 }
 
-func (c *connections) putData(g *gin.Context) {
+func (c *connections) PutData(g *gin.Context) {
 
 	deviceID := g.Param("deviceID")
 
@@ -77,18 +78,20 @@ func (c *connections) putData(g *gin.Context) {
 	}).Debug("Put Device data")
 
 	// TODO : add this data to the database
+	// c.db.AddDeviceData(dd)
+	c.dbData[deviceID] = append(c.dbData[deviceID], dd)
 
 }
 
 // getDeviceByUser gets the information for the device owned by a user TODO
-func (c *connections) getDevicesByUser(g *gin.Context) {
+func (c *connections) GetDevicesByUser(g *gin.Context) {
 
 }
 
-func (c *connections) createDevice(g *gin.Context) {
+func (c *connections) CreateDevice(g *gin.Context) {
 
 }
 
-func (c *connections) getDeviceByCreds(g *gin.Context) {
+func (c *connections) GetDeviceByCreds(g *gin.Context) {
 
 }
