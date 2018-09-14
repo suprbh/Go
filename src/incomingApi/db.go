@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
 
 type connections struct {
 	dbUser   map[string]string
@@ -20,11 +24,18 @@ var dbDeviceCreds = map[string]string{
 	"apiKey2": " device2",
 }
 
-// TODO: This function authorizes without using gin BasicAuth,
-// It takes in name: device or user,
-// Corresponding key and value pair for authorization
-func (c *connections) authorize(name, key, value string) bool {
-	return true
+type deviceProfile struct {
+	name        string
+	deviceID    string
+	modelNumber string
+	lat         string
+	lon         string
+}
+
+type userProfile struct {
+	name        string
+	address     string
+	memberSince time.Time
 }
 
 // putDevice updates the information about the device TODO
