@@ -10,7 +10,14 @@ cassandra:
   username: test123
   password: test123
 
-mysql:
-  database: test
-  username: test123
-  password: test123
+redis:
+  default: &default
+    url: redis://localhost:6379
+    db: 1
+  
+  development:
+    <<: *default
+
+  production:
+    <<: *default
+    url: redis://somehost:6379

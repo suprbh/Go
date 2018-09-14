@@ -4,6 +4,7 @@ import (
 	"cassandra"
 	"io/ioutil"
 	"os"
+	"redis"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -17,6 +18,7 @@ type ServerConfig struct {
 type config struct {
 	Server    ServerConfig     `yaml:"server"`
 	Cassandra cassandra.Config `yaml:"cassandra"`
+	Redis     redis.Config     `yaml:"redis"`
 	rootPath  string
 }
 

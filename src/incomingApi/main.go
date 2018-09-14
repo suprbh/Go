@@ -18,6 +18,13 @@ type ErrorResponse struct {
 	ErrorType    string `json:"errorType,omitempty"`
 }
 
+// CreateSuccessResponse is the payload returned after creating
+// a new Device.
+type CreateSuccessResponse struct {
+	DeviceID string `json:"deviceId"`
+	APIKey   string `json:"apiKey"`
+}
+
 // TODO add testing framework
 func main() {
 

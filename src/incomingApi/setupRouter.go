@@ -38,9 +38,6 @@ func setupRouter() *gin.Engine {
 		{
 			deviceAuth.Use(c.authorizeDevice())
 			deviceAuth.PUT("/devices/:deviceID", c.PutDevice)
-			// deviceAuth.PATCH("/devices/:deviceID", c.UpdateDevice)
-			// deviceAuth.DELETE("/devices/:deviceID", c.DeleteDevice)
-
 			dataAuth := deviceAuth.Group("/data")
 			{
 				dataAuth.PUT("/data/:deviceID", c.PutData)
@@ -52,7 +49,7 @@ func setupRouter() *gin.Engine {
 			userAuth.Use(c.authorizeUser())
 			userAuth.GET("/users/devices/list", c.GetDevicesByUser)
 			userAuth.POST("/users/create", c.CreateDevice)
-			userAuth.GET("/list", c.GetDeviceByCreds)
+			userAuth.DELETE("/devices/:deviceID", c.DeleteDevice)
 
 		}
 
