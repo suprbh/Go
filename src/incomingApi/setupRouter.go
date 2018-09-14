@@ -34,8 +34,6 @@ func setupRouter() *gin.Engine {
 	// TODO implement each route handler
 	v1 := r.Group("/v1")
 	{
-		// deviceAuth := v1.Group("/devices", gin.BasicAuth(dbDeviceCreds))
-		// deviceAuth.PUT("/devices/:deviceID", c.putDevice)
 		deviceAuth := v1.Group("/devices")
 		{
 			deviceAuth.Use(c.authorizeDevice())
@@ -49,8 +47,6 @@ func setupRouter() *gin.Engine {
 			}
 		}
 
-		// userAuth := v1.Group("/", gin.BasicAuth(dbUserCreds))
-		// userAuth.GET("/users/devices/list", c.getDevicesByUser)
 		userAuth := v1.Group("/users")
 		{
 			userAuth.Use(c.authorizeUser())
