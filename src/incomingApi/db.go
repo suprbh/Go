@@ -10,6 +10,7 @@ type connections struct {
 	dbUser   map[string]string
 	dbDevice map[string]string
 	// cass *cassandra.cctx  // TODO
+	// mydb *mysqldb.mctx
 }
 
 // DB : Temporarily using a map instead of actual Redis/Cassandra/MySql/MongoDB database
@@ -36,6 +37,7 @@ type userProfile struct {
 	name        string
 	address     string
 	memberSince time.Time
+	devices     []deviceProfile
 }
 
 // putDevice updates the information about the device TODO
@@ -43,7 +45,19 @@ func (c *connections) putDevice(g *gin.Context) {
 
 }
 
+func (c *connections) putData(g *gin.Context) {
+
+}
+
 // getDeviceByUser gets the information for the device owned by a user TODO
-func (c *connections) getDeviceByUser() {
+func (c *connections) getDevicesByUser(g *gin.Context) {
+
+}
+
+func (c *connections) createDevice(g *gin.Context) {
+
+}
+
+func (c *connections) getDeviceByCreds(g *gin.Context) {
 
 }
